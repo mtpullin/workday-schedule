@@ -1,20 +1,19 @@
 var currentDay = document.getElementById("currentDay")
-var taskEl = document.getElementById("task")
+var taskEl = document.getElementById("taskText")
 
 currentDay.innerHTML = moment().format("MMM, DD, YYYY")
 
 var loadTasks = function() {
-    tasks = JSON.parse(localStorage.getItem("tasks"));
-    if(!tasks){
+    tasks = JSON.parse(localStorage.getItem("taskText"));
+    if(!tasks)
     tasks = []
-    }
-};
+    };
 
 
 
 
 
-$("taskEl").on("click",function() {
+$(".task").on("click",function() {
     var text = $(this)
     .text()
     .trim()
@@ -24,3 +23,9 @@ $("taskEl").on("click",function() {
 
     textInput.trigger("focus");
 });
+
+$(".saveBtn").on("click",function(){
+    localStorage.setItem("tasks", JSON.stringify(taskEl));
+    alert("Task Saved")
+})
+loadTasks();
